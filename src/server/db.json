@@ -1,0 +1,9 @@
+{
+  "items": [
+    { "id": 1, "name": "Widget A", "status": "active", "price": 29.99, "inventory": 10 },
+    { "id": "2", "name": "Widget B", "status": "inactive", "price": "19.99" },
+    { "id": 3, "name": null, "status": "ACTIVE", "price": 39.99, "inventory": "5" },
+    { "id": 4, "name": "Widget D", "status": "unknown", "price": -10.00, "inventory": 0 },
+    { "id": 5, "name": "Widget E", "description": "Missing status and price" }
+  ]
+} 
