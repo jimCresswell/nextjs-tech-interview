@@ -29,7 +29,7 @@ This exercise is designed as a 1-hour live coding session to evaluate a candidat
    - User must debug headers and fix authentication against a simple user JSON DB
    - This should be solvable within 5-10 minutes but tests critical problem-solving
 
-   ```json:src/server/users.json
+   ```json:server/users.json
    [
      {
        "username": "test_user",
@@ -65,7 +65,7 @@ This exercise is designed as a 1-hour live coding session to evaluate a candidat
      - Negative prices or invalid data
    - Candidate must improve the provided stub normalization function
 
-   ```json:src/server/db.json
+   ```json:server/db.json
    {
      "items": [
        { "id": 1, "name": "Widget A", "status": "active", "price": 29.99, "inventory": 10 },
@@ -79,8 +79,11 @@ This exercise is designed as a 1-hour live coding session to evaluate a candidat
 
 3. **UI Implementation**
 
-   - Build or enhance a dashboard displaying the items
-   - Implement basic filtering (by status)
+   - Build or enhance a multi-page application with:
+     - Landing page with app introduction
+     - Items listing page with filtering capabilities
+     - Detailed item view page for individual items
+   - Implement loading states and error handling
    - Focus on accessibility (contrast, semantic HTML, ARIA)
 
 4. **Testing**
@@ -93,18 +96,26 @@ This exercise is designed as a 1-hour live coding session to evaluate a candidat
 technical-interview-exercise/
 ├── src/
 │   ├── app/                   # Next.js app directory
-│   │   ├── page.tsx           # Main dashboard page
+│   │   ├── page.tsx           # Landing page with app intro
+│   │   ├── items/             # Items routes
+│   │   │   ├── page.tsx       # Items listing with filters
+│   │   │   └── [id]/          # Dynamic route for item details
+│   │   │       └── page.tsx   # Item detail page
 │   │   └── layout.tsx         # Root layout
 │   ├── components/            # React components
-│   │   └── ItemList.tsx       # Basic item list component
+│   │   ├── ui/                # UI components
+│   │   │   ├── button.tsx     # Button with polymorphic "as" prop
+│   │   │   ├── card.tsx       # Card component
+│   │   │   └── skeleton.tsx   # Loading skeleton component
+│   │   └── ItemList.tsx       # Items list with validation
 │   ├── lib/
 │   │   ├── api.ts             # API client with authentication issue
 │   │   ├── types.ts           # TypeScript type definitions
 │   │   └── utils.ts           # Normalization utilities (needs improvement)
-│   └── server/
-│       ├── db.json            # Item data with issues
-│       ├── users.json         # Authentication database
-│       └── auth.js            # Authentication middleware
+├── server/
+│   ├── db.json                # Item data with issues
+│   ├── users.json             # Authentication database
+│   └── auth.js                # Authentication middleware
 ├── tests/
 │   ├── unit/                  # Unit tests
 │   └── components/            # Component tests

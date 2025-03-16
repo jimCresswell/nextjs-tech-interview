@@ -18,18 +18,26 @@ The exercise has three main challenges:
 technical-interview-exercise/
 ├── src/
 │   ├── app/                   # Next.js app directory
-│   │   ├── page.tsx           # Main dashboard page
+│   │   ├── page.tsx           # Landing page with intro and navigation
+│   │   ├── items/             # Items routes
+│   │   │   ├── page.tsx       # Items listing page with filtering
+│   │   │   └── [id]/          # Dynamic item route
+│   │   │       └── page.tsx   # Item detail page
 │   │   └── layout.tsx         # Root layout
 │   ├── components/            # React components
-│   │   └── ItemList.tsx       # Basic item list component (needs enhancement)
+│   │   ├── ui/                # UI components
+│   │   │   ├── button.tsx     # Button component with polymorphic "as" prop
+│   │   │   ├── card.tsx       # Card component
+│   │   │   └── skeleton.tsx   # Skeleton loading component
+│   │   └── ItemList.tsx       # Item list component with data validation
 │   ├── lib/                   # Utility functions and types
-│   │   ├── api.ts             # API client with authentication issue
+│   │   ├── api.ts             # API client with item fetching functions
 │   │   ├── types.ts           # TypeScript type definitions
-│   │   └── utils.ts           # Data normalization utilities (needs improvement)
-│   └── server/                # Server files
-│       ├── db.json            # Item database with intentional data issues
-│       ├── users.json         # User database for authentication
-│       └── auth.js            # Authentication middleware
+│   │   └── utils.ts           # Data normalization utilities
+├── server/                    # Server files
+│   ├── db.json                # Item database with intentional data issues
+│   ├── users.json             # User database for authentication
+│   └── auth.js                # Authentication middleware
 ├── tests/                     # Test files
 └── README.md                  # Instructions
 ```
@@ -94,7 +102,7 @@ technical-interview-exercise/
    - The initial API call in `lib/api.ts` fails with a 401 Unauthorized error
    - Debug and fix the authentication issue to successfully fetch data
    - The authentication uses Basic Auth with a username and password
-   - Check `src/server/users.json` for the correct credentials
+   - Check `server/users.json` for the correct credentials
 
 2. **Data Handling Challenge**
 
@@ -108,17 +116,20 @@ technical-interview-exercise/
 
 3. **UI Implementation**
 
-   - Improve the dashboard in `app/page.tsx` to:
-     - Display normalized data in a user-friendly way
-     - Add a simple filtering mechanism (e.g., by status)
-     - Make the UI accessible by paying attention to:
-       - Color contrast (WCAG AA compliance)
-       - Semantic HTML
-       - Keyboard navigation
-       - Screen reader compatibility
+   - The application now features a multi-page structure:
+     - A landing page (`/`) that introduces the application
+     - An items listing page (`/items`) with filtering by status
+     - A detailed item view page (`/items/[id]`) showing comprehensive item information
+   - Each page should be accessible, paying attention to:
+     - Color contrast (WCAG AA compliance)
+     - Semantic HTML
+     - Keyboard navigation
+     - Screen reader compatibility
+   - Appropriate loading states and error handling should be implemented
 
 4. **Testing**
    - Add or improve tests for your data normalization logic
+   - Ensure UI components pass accessibility tests
 
 ## Focus Areas
 
