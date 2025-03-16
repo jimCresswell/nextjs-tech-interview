@@ -11,8 +11,7 @@
     "test:watch": "vitest",
     "test:debug": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "pretest:a11y": "npm run build && npm run start",
-    "test:a11y": "pa11y http://localhost:3000",
+    "test:a11y": "pa11y http://localhost:3000 # The server should be available at this address before this command is run",
     "check-type": "tsc --noEmit",
     "type-check": "tsc --noEmit",
     "server": "json-server --watch src/server/db.json --port 3001 --middlewares ./src/server/auth.js"
