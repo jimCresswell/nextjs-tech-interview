@@ -4,24 +4,24 @@
  */
 
 /**
- * The current status of an inventory item
- * ISSUE: Doesn't handle inconsistent case formats or unknown values
- */
-export type ItemStatus = "active" | "inactive" | string;
-
-/**
  * Basic inventory item structure
  * ISSUE: This doesn't properly handle all the edge cases in the data
  */
-export interface Item {
-  id: number | string;
-  name: string | null;
-  status?: ItemStatus;
+export interface RawItem {
+  id: number;
+  name: string;
+  status?: string;
   price?: number | string;
   inventory?: number | string;
   description?: string;
 }
-export type Items = Item[];
+export function isRawItem(item: unknown): item is RawItem {
+  return typeof item === "object" && item !== null && "id" in item;
+}
+export type RawItems = RawItem[];
+export function isRawItems(items: unknown): items is RawItems {
+  return Array.isArray(items) && items.every(isRawItem);
+}
 
 /**
  * Example of a more robust normalized item type that the candidate might create
@@ -34,3 +34,4 @@ export interface NormalizedItem {
   inventory: number;
   description?: string;
 }
+export type NormalizedItems = NormalizedItem[];

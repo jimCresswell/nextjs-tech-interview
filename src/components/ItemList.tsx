@@ -1,9 +1,9 @@
 import React  from "react";
-import type { Items } from "@/lib/types";
+import type { NormalizedItems } from "@/lib/types";
 
 
 type ItemListProps = {
-  items: Items;
+  items: NormalizedItems;
 };
 /**
  * ItemList component to display a list of items in a table.

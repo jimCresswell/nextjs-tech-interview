@@ -5,7 +5,7 @@ import { fetchItems } from '@/lib/api';
 import { Card } from '@/components/ui/card';
 import styled from 'styled-components';
 
-import type { Items } from '@/lib/types';
+import type { NormalizedItems } from '@/lib/types';
 
 const PageContainer = styled.main`
   padding: 1rem;
@@ -96,7 +96,7 @@ const ErrorHint = styled.p`
 `;
 
 export default function Dashboard() {
-  const [items, setItems] = useState<Items>([]);
+  const [items, setItems] = useState<NormalizedItems>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 

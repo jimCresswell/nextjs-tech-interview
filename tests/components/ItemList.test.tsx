@@ -2,11 +2,17 @@ import { describe, test, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ItemList from '../../src/components/ItemList';
+import type { NormalizedItems, RawItems } from '../../src/lib/types';
 
 describe('ItemList component', () => {
-  const sampleItems = [
-    { id: '1', name: 'Item One', description: 'A sample item', status: 'active', price: '10.99' },
-    { id: 2, name: 'Item Two', description: '', status: 'inactive', price: 20.5 }
+  const goodItems: NormalizedItems = [
+    { id: 1, name: 'Item One', description: 'A sample item', status: 'active', price: 10.99, inventory: 10 },
+    { id: 2, name: 'Item Two', description: '', status: 'inactive', price: 20.5, inventory: 20 }
+  ];
+
+  const badItems: unknown = [
+    { id: "1", name: 'Item One', description: 'A sample item', status: 'active', price: 10.99 },
+    { id: "two", name: 'Item Two', description: '', status: 'hoopy', price: "fiver", inventory: 20 }
   ];
 
   /**
@@ -21,8 +27,12 @@ describe('ItemList component', () => {
    * Test to verify that the component renders a table with item data.
    */
   test('renders a table with item data', () => {
-    render(<ItemList items={sampleItems} />);
+    render(<ItemList items={goodItems} />);
     expect(screen.getByText('Item One')).toBeInTheDocument();
     expect(screen.getByText('Item Two')).toBeInTheDocument();
+  });
+
+  test('Deals with bad data', () => {
+    expect(() => render(<ItemList items={badItems as NormalizedItems} />)).toThrow();
   });
 });

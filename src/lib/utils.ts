@@ -1,4 +1,10 @@
-import { NormalizedItem } from "./types";
+import {
+  isRawItem,
+  isRawItems,
+  NormalizedItem,
+  RawItem,
+  RawItems,
+} from "./types";
 
 /**
  * Normalizes a single inventory item to handle data inconsistencies
@@ -14,26 +20,28 @@ import { NormalizedItem } from "./types";
  * @param item The raw item data from the API
  * @returns A normalized item with consistent types and values
  */
-export function normalizeItem(item: unknown): NormalizedItem {
+export function normalizeItem(item: unknown | RawItem): NormalizedItem {
   // Simple stub implementation that passes tests
   if (!item || typeof item !== "object") {
     throw new Error("Invalid item data");
   }
 
-  const data = item as Record<string, number | string | null | undefined>;
+  if (!isRawItem(item)) {
+    throw new TypeError(`Invalid raw item data ${JSON.stringify(item)}`);
+  }
 
   // Here was are using type assertions to ensure the types look correct to typescript,
   // however, this is not the best practice, we need to implement some kinds of
   // type guards and data normalization functions to ensure the data is really correct.
   // `name` has been handled for you as an example.
-  const id = data.id as number;
-  const status = data.status as "active" | "inactive" | "unknown";
-  const price = data.price as number;
-  const inventory = data.inventory as number;
-  const description = data.description as string;
+  const id = item.id as number;
+  const status = item.status as "active" | "inactive" | "unknown";
+  const price = item.price as number;
+  const inventory = item.inventory as number;
+  const description = item.description as string;
 
   // Get the raw name
-  const name = data.name;
+  const name = item.name;
   // Define a type guard function to check the type and structure of the variable.
   function isName(name: unknown): name is string {
     return (
@@ -66,16 +74,20 @@ export function normalizeItem(item: unknown): NormalizedItem {
  * @param items The raw items data from the API
  * @returns An array of normalized items
  */
-export function normalizeItems(items: unknown[]): NormalizedItem[] {
+export function normalizeItems(items: unknown[] | RawItems): NormalizedItem[] {
   if (!Array.isArray(items)) {
     return [];
+  }
+
+  if (!isRawItems(items)) {
+    throw new TypeError(`Invalid raw items data ${JSON.stringify(items)}`);
   }
 
   return items.map((item) => {
     try {
       return normalizeItem(item);
     } catch (error) {
-      console.error("Error normalizing item:", error);
+      console.error("Error normalizing item:", error, item);
       // Return a fallback item
       return {
         id: 0,

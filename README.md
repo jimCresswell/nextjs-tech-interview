@@ -58,13 +58,13 @@ technical-interview-exercise/
    In a terminal window, run:
 
    ```bash
-   npm run server
+   npm run serve:api
    ```
 
    The server will be running at `http://localhost:3001` with authentication required.
 
 3. **Start the Next.js Application:**
-   In another terminal window, run:
+   In **another terminal window**, run:
 
    ```bash
    npm run dev
@@ -72,10 +72,18 @@ technical-interview-exercise/
 
    The application will be available at `http://localhost:3000`.
 
-4. **Run Tests:**
-   ```bash
-   npm test
-   ```
+## Useful Commands
+
+- `npm run serve:api` - Start the JSON server
+- `npm run dev` - Start the Next.js application in development mode
+- `npm run build` - Build the Next.js application
+- `npm run start` - Start the Next.js application in production mode (requires a build first)
+- `npm run check-type` - Check the types
+- `npm run lint` - Run the linter
+- `npm run test` - Run the tests
+- `npm run test:watch` - Run the tests in watch mode
+- `npm run test:coverage` - Run the tests with coverage
+- `npm run test:a11y` - Run the accessibility checks
 
 ## Requirements
 
@@ -116,7 +124,9 @@ We're primarily interested in:
 
 1. Your **problem-solving approach**: How you identify and fix issues
 2. Your **communication skills**: How you explain your thought process
-3. Your **accessibility awareness**: How you make the UI accessible to all users
+3. Your **accessibility awareness**: How you make the UI [accessible to all users.](https://developer.mozilla.org/en-US/docs/Web/Accessibility). [Web performance](https://web.dev/performance/) and metrics like the [Core Web Vitals](https://developer.chrome.com/docs/devtools/performance/overview) are also important for accessibility, but it's largely out of scope for this exercise.
+
+Remember that there are multiple places that important information on the state of the running application might be seen; the terminal running the server, the terminal running the Next.js application, the browser console and developer tools, and of course the application UI itself.
 
 ## Tips for Success
 
