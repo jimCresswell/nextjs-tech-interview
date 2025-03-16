@@ -42,21 +42,30 @@ export function normalizeItem(item: unknown | RawItem): NormalizedItem {
 
   // Get the raw name
   const name = item.name;
-  // Define a type guard function to check the type and structure of the variable.
-  function isName(name: unknown): name is string {
-    return (
-      typeof name === "string" &&
-      name !== null &&
-      name !== undefined &&
-      name !== ""
-    );
+
+  // Catching name errors for some reason.
+  if (!name) {
+    throw new Error("Invalid name");
   }
+  // Define a type guard function to check the type and structure of the variable.
+  // DEBUG: commented out during debugging, remove after.
+  // function isName(name: unknown): name is string {
+  //   return (
+  //     typeof name === "string" &&
+  //     name !== null &&
+  //     name !== undefined &&
+  //     name !== ""
+  //   );
+  // }
+
   // Use the type guard function to check variable and throw an error if it's not the right type.
   // If this check passes, then after this point TypeScript will know that the variable is a string.
   // There may be issues with our code, there may be issues with the data.
-  if (!isName(name)) {
-    throw new TypeError(`Invalid name: ${name}`);
-  }
+
+  // DEBUG: commented out during debugging, remove after.
+  // if (!isName(name)) {
+  //   throw new TypeError(`Invalid name: ${name}`);
+  // }
 
   return {
     id,

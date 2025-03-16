@@ -4,10 +4,11 @@ import styled, { css } from 'styled-components';
 type ButtonVariant = 'primary' | 'secondary' | 'outline';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonProps = {
   variant?: ButtonVariant;
   size?: ButtonSize;
-}
+  as?: React.ElementType;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const StyledButton = styled.button<{
   $variant: ButtonVariant;
@@ -17,9 +18,10 @@ const StyledButton = styled.button<{
   align-items: center;
   justify-content: center;
   border-radius: 0.375rem;
-  font-medium: 500;
+  font-weight: 500;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   cursor: pointer;
+  text-decoration: none;
 
   &:focus-visible {
     outline: none;
@@ -74,15 +76,20 @@ const StyledButton = styled.button<{
   `}
 `;
 
-export const Button: React.FC<ButtonProps> = ({
-  children,
-  variant = 'primary',
-  size = 'md',
-  ...props
-}) => {
-  return (
-    <StyledButton $variant={variant} $size={size} {...props}>
-      {children}
-    </StyledButton>
-  );
-}; 
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ children, variant = 'primary', size = 'md', as, ...props }, ref) => {
+    return (
+      <StyledButton
+        $variant={variant}
+        $size={size}
+        as={as}
+        ref={ref}
+        {...props}
+      >
+        {children}
+      </StyledButton>
+    );
+  }
+);
+
+Button.displayName = 'Button'; 

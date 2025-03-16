@@ -4,7 +4,9 @@ This live coding exercise is designed to assess your problem-solving approach, c
 
 ## Exercise Overview
 
-You'll be working on a Next.js dashboard application that displays inventory items fetched from a JSON server. The exercise has three main challenges:
+You'll be working on a proof of concept Next.js dashboard application that displays inventory items fetched from a JSON server. A board consisting of **important people** will see the demo. A junior colleague has carried out the work so far, and assures you that everything is working fine.
+
+The exercise has three main challenges:
 
 1. **Authentication**: Fix an authentication issue with the API
 2. **Data Handling**: Improve the data normalization function to handle inconsistent data

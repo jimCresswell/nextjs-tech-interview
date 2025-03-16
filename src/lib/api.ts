@@ -18,8 +18,9 @@ import { normalizeItem, normalizeItems } from "./utils";
 function getUserDetails() {
   return {
     username: "test_user",
-    password: "correct_password",
-    // "definitely_the_wrong_password-what_is_the_server_auth_middleware_expecting?",
+    // DEBUG: Just for testing, don't let this get to production.
+    password:
+      "definitely_the_wrong_password-what_is_the_server_auth_middleware_expecting?",
   };
 }
 

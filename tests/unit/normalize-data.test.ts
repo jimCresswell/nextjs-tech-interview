@@ -9,7 +9,8 @@ describe("Data Normalization", () => {
       status: "active",
       price: 19.99,
     };
-    expect(() => normalizeItem(item)).toThrow("Invalid name: null");
+    const errorRegex = /Invalid name/;
+    expect(() => normalizeItem(item)).toThrow(errorRegex);
   });
 
   // The candidate should implement and add more tests
