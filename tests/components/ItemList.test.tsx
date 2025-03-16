@@ -1,6 +1,7 @@
+import { describe, test, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import ItemList from '../components/ItemList';
+import ItemList from '../../src/components/ItemList';
 
 describe('ItemList component', () => {
   const sampleItems = [

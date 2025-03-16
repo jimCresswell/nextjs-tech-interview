@@ -21,6 +21,7 @@ export interface Item {
   inventory?: number | string;
   description?: string;
 }
+export type Items = Item[];
 
 /**
  * Example of a more robust normalized item type that the candidate might create

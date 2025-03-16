@@ -7,26 +7,44 @@ This live coding exercise is designed to assess your problem-solving approach, c
 You'll be working on a Next.js dashboard application that displays inventory items fetched from a JSON server. The exercise has three main challenges:
 
 1. **Authentication**: Fix an authentication issue with the API
-2. **Data Handling**: Process inconsistent data from the API
-3. **Accessible UI**: Build a dashboard to display the data with accessibility in mind
+2. **Data Handling**: Improve the data normalization function to handle inconsistent data
+3. **Accessible UI**: Enhance the dashboard to display the data with accessibility in mind
 
 ## Project Structure
 
 ```
 technical-interview-exercise/
-├── app/                   # Next.js app directory
-│   ├── page.tsx           # Main dashboard page (partially implemented)
-│   └── layout.tsx         # Root layout
-├── components/            # React components
-├── lib/                   # Utility functions and types
-│   ├── api.ts             # API client with authentication issue
-│   └── types.ts           # TypeScript type definitions
-├── tests/                 # Test files
-├── db.json                # Item database with intentional data issues
-└── users.json             # User database for authentication
+├── src/
+│   ├── app/                   # Next.js app directory
+│   │   ├── page.tsx           # Main dashboard page
+│   │   └── layout.tsx         # Root layout
+│   ├── components/            # React components
+│   │   └── ItemList.tsx       # Basic item list component (needs enhancement)
+│   ├── lib/                   # Utility functions and types
+│   │   ├── api.ts             # API client with authentication issue
+│   │   ├── types.ts           # TypeScript type definitions
+│   │   └── utils.ts           # Data normalization utilities (needs improvement)
+│   └── server/                # Server files
+│       ├── db.json            # Item database with intentional data issues
+│       ├── users.json         # User database for authentication
+│       └── auth.js            # Authentication middleware
+├── tests/                     # Test files
+└── README.md                  # Instructions
 ```
 
+## Tech Stack
+
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Vitest](https://vitest.dev/)
+
 ## Setup Instructions
+
+**Prerequisites:**
+
+- [Node.js v22 or higher](https://nodejs.org/en/download/)
+- The npm or pnpm package managers - npm comes bundled with Node.
 
 1. **Install Dependencies:**
 
@@ -40,7 +58,7 @@ technical-interview-exercise/
    In a terminal window, run:
 
    ```bash
-   npx json-server --watch server/db.json --port 3001 --middlewares ./server/auth.js
+   npm run server
    ```
 
    The server will be running at `http://localhost:3001` with authentication required.
@@ -50,8 +68,6 @@ technical-interview-exercise/
 
    ```bash
    npm run dev
-   # or
-   pnpm dev
    ```
 
    The application will be available at `http://localhost:3000`.
@@ -59,8 +75,6 @@ technical-interview-exercise/
 4. **Run Tests:**
    ```bash
    npm test
-   # or
-   pnpm test
    ```
 
 ## Requirements
@@ -70,46 +84,44 @@ technical-interview-exercise/
    - The initial API call in `lib/api.ts` fails with a 401 Unauthorized error
    - Debug and fix the authentication issue to successfully fetch data
    - The authentication uses Basic Auth with a username and password
+   - Check `src/server/users.json` for the correct credentials
 
 2. **Data Handling Challenge**
 
-   - Once authenticated, you'll receive data with various inconsistencies:
-     - Mixed data types (string vs number)
-     - Missing required fields
-     - Inconsistent enum values (e.g., "active" vs "ACTIVE")
-     - Invalid values (negative prices)
-   - Create a solution to normalize and validate this data before displaying it
+   - The `normalizeItem` function in `lib/utils.ts` needs improvement to handle various data issues:
+     - String IDs that need conversion to numbers
+     - Missing or null field values
+     - Inconsistent status values (e.g., "active" vs "ACTIVE")
+     - String prices that need conversion to numbers
+     - Negative prices that should be sanitized
+   - Tests are provided in `tests/unit/normalize-data.test.ts` to guide your implementation
 
 3. **UI Implementation**
 
-   - Build a dashboard to display the normalized inventory items
-   - Implement a simple filtering mechanism (e.g., by status)
-   - Ensure the UI is accessible, with particular attention to:
-     - Color contrast (WCAG AA compliance)
-     - Semantic HTML
-     - Keyboard navigation
-     - Screen reader compatibility
+   - Improve the dashboard in `app/page.tsx` to:
+     - Display normalized data in a user-friendly way
+     - Add a simple filtering mechanism (e.g., by status)
+     - Make the UI accessible by paying attention to:
+       - Color contrast (WCAG AA compliance)
+       - Semantic HTML
+       - Keyboard navigation
+       - Screen reader compatibility
 
 4. **Testing**
-   - Add at least one unit test for your data normalization logic
-   - Add a component test for one of your UI components
+   - Add or improve tests for your data normalization logic
 
-## Evaluation Criteria
+## Focus Areas
 
-You'll be evaluated on:
+We're primarily interested in:
 
-1. **Problem-solving approach**: How you tackle debugging and data issues
-2. **Communication skills**: How clearly you explain your thought process
-3. **Technical knowledge**: Your understanding of React, TypeScript, and Next.js
-4. **Code quality**: Organization, readability, and best practices
-5. **Accessibility awareness**: Implementation of accessible UI patterns
+1. Your **problem-solving approach**: How you identify and fix issues
+2. Your **communication skills**: How you explain your thought process
+3. Your **accessibility awareness**: How you make the UI accessible to all users
 
 ## Tips for Success
 
-- Talk through your thought process as you work
-- Ask clarifying questions if something is unclear
-- Focus on solving the immediate problems rather than creating a perfect application
-- Consider both the happy path and error states
-- Prioritize code correctness over aesthetics, but don't ignore basic usability
+- Explain your thought process as you work
+- Consider both the happy path and error cases
+- Make the UI accessible
 
 Good luck with the exercise!

@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { fetchItems } from '@/lib/api';
-import { Item } from '@/lib/types';
 import { Card } from '@/components/ui/card';
 
+import type { Items } from '@/lib/types';
+
 export default function Dashboard() {
-  const [items, setItems] = useState<Item[]>([]);
+  const [items, setItems] = useState<Items>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -44,7 +45,7 @@ export default function Dashboard() {
               <h2 className="text-lg font-medium text-red-700">Error</h2>
               <p className="text-red-700">{error}</p>
               <p className="mt-2 text-sm text-red-600">
-                Hint: Check your API authentication settings in lib/api.ts
+                <code>{JSON.stringify(error, null, 2)}</code>
               </p>
             </div>
           </div>

@@ -58,26 +58,5 @@ describe('UI Components', () => {
       expect(screen.getByRole('option', { name: 'Inactive' })).toBeInTheDocument();
     });
 
-    it('calls onChange when an option is selected', async () => {
-      const options = [
-        { value: 'active', label: 'Active' },
-        { value: 'inactive', label: 'Inactive' }
-      ];
-      
-      const handleChange = vi.fn();
-      
-      render(
-        <Select 
-          label="Status" 
-          options={options} 
-          value="active" 
-          onChange={handleChange}
-        />
-      );
-      
-      // Note: This test would need to be expanded by the candidate
-      // userEvent.selectOptions is complex with controlled components
-      // This is a placeholder for them to complete
-    });
   });
 }); 
