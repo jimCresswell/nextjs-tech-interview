@@ -1,15 +1,12 @@
+'use client';
+
 import { GlobalStyles } from './globals.styles';
-import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import StyledComponentsRegistry from './registry';
 import styled from 'styled-components';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: 'Inventory Dashboard',
-  description: 'A dashboard for managing inventory items',
-};
 
 const HeaderContainer = styled.header`
   background-color: white;

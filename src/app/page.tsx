@@ -107,7 +107,16 @@ export default function Dashboard() {
         setItems(data);
         setError(null);
       } catch (err) {
-        setError(`Failed to load items: ${err instanceof Error ? err.message : 'Unknown error'}`);
+        if (err instanceof Error) {
+          const message = err.message;
+          if (message.includes('401')) {
+            setError(`Unauthorized: Please check your credentials: ${message}`);
+          } else {
+            setError(`Failed to load items: ${err.message}`);
+          }
+        } else {
+          setError('Failed to load items: Unknown error');
+        }
         setItems([]);
       } finally {
         setLoading(false);

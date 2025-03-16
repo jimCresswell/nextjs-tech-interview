@@ -14,13 +14,22 @@ function getAuthorizationHeader(username: string, password: string) {
   return "Basic " + btoa(`${username}:${password}`);
 }
 
+type JsonValue =
+  | string
+  | number
+  | boolean
+  | null
+  | JsonValue[]
+  | { [key: string]: JsonValue };
+type JsonObject = Record<string, JsonValue>;
+
 /**
  * Fetches all inventory items from the API
  *
  * TODO: The authentication is currently failing with a 401 Unauthorized error.
  * The candidate needs to identify the issue with the credentials below.
  *
- * @returns {Promise<unknown[]>} The list of inventory items
+ * @returns {Promise<JsonObject[]>} The list of inventory items
  */
 export async function fetchItems() {
   const { username, password } = getUserDetails();

@@ -1,4 +1,4 @@
-import React from "react";
+import React  from "react";
 import type { Items } from "@/lib/types";
 
 
@@ -12,7 +12,7 @@ type ItemListProps = {
  * @param {Array} props.items - An array of item objects to display.
  * @returns The rendered table of items.
  */
-export default function ItemList({ items }: ItemListProps): JSX.Element { 
+export default function ItemList({ items }: ItemListProps): React.JSX.Element { 
   return (
     <div>
       {items.length === 0 ? (
