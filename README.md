@@ -36,7 +36,7 @@ technical-interview-exercise/
 
 - [Next.js](https://nextjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
+- [styled-components](https://styled-components.com/)
 - [Vitest](https://vitest.dev/)
 
 ## Setup Instructions

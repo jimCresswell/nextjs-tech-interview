@@ -2,11 +2,12 @@
   "name": "technical-interview-exercise",
   "version": "0.1.0",
   "private": true,
+  "module": "ESNext",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "next lint",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:debug": "vitest run",
@@ -17,13 +18,11 @@
     "server": "json-server --watch src/server/db.json --port 3001 --middlewares ./src/server/auth.js"
   },
   "dependencies": {
-    "next": "^14",
+    "next": "^15.2.2",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
-    "@eslint/js": "^8.57.1",
-    "@next/eslint-plugin-next": "^15.2.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.1",
@@ -31,19 +30,16 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@vitest/eslint-plugin": "^1.1.37",
-    "autoprefixer": "^10.4.16",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^14",
-    "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.2.0",
+    "babel-plugin-styled-components": "^2.1.4",
+    "eslint": "^9",
+    "eslint-config-next": "15.2.2",
     "globals": "^16.0.0",
     "jsdom": "^26.0.0",
     "json-server": "^0.17.4",
     "pa11y": "^8.0.0",
-    "postcss": "^8.4.32",
-    "tailwindcss": "^3.4.0",
-    "typescript": "^5.3.x",
-    "typescript-eslint": "^8.26.1",
+    "styled-components": "^6.1.15",
+    "stylis": "^4.3.6",
+    "typescript": "5.8.2",
     "vitest": "^3.0.8"
   }
 }

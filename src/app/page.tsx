@@ -1,10 +1,99 @@
-'use client';
+"use client";
 
 import { useState, useEffect } from 'react';
 import { fetchItems } from '@/lib/api';
 import { Card } from '@/components/ui/card';
+import styled from 'styled-components';
 
 import type { Items } from '@/lib/types';
+
+const PageContainer = styled.main`
+  padding: 1rem;
+`;
+
+const PageTitle = styled.h1`
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+`;
+
+const FilterContainer = styled.div`
+  margin-bottom: 1rem;
+`;
+
+const ItemsGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+const CardTitle = styled.h2`
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 0;
+`;
+
+const ItemText = styled.p`
+  margin: 0.25rem 0;
+`;
+
+const ItemDescription = styled.p`
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+`;
+
+const LoadingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+`;
+
+const LoadingText = styled.p`
+  font-size: 1.125rem;
+`;
+
+const ErrorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1rem;
+`;
+
+const ErrorBox = styled.div`
+  background-color: #fef2f2;
+  border-left: 4px solid #ef4444;
+  padding: 1rem;
+  width: 100%;
+  max-width: 42rem;
+`;
+
+const ErrorTitle = styled.h2`
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #b91c1c;
+`;
+
+const ErrorMessage = styled.p`
+  color: #b91c1c;
+`;
+
+const ErrorHint = styled.p`
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #ef4444;
+`;
 
 export default function Dashboard() {
   const [items, setItems] = useState<Items>([]);
@@ -30,50 +119,48 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-lg">Loading inventory items...</p>
-      </div>
+      <LoadingContainer>
+        <LoadingText>Loading inventory items...</LoadingText>
+      </LoadingContainer>
     );
   }
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-4">
-        <div className="bg-red-50 border-l-4 border-red-400 p-4 w-full max-w-2xl" role="alert">
-          <div className="flex">
-            <div>
-              <h2 className="text-lg font-medium text-red-700">Error</h2>
-              <p className="text-red-700">{error}</p>
-              <p className="mt-2 text-sm text-red-600">
-                <code>{JSON.stringify(error, null, 2)}</code>
-              </p>
-            </div>
+      <ErrorContainer>
+        <ErrorBox role="alert">
+          <div>
+            <ErrorTitle>Error</ErrorTitle>
+            <ErrorMessage>{error}</ErrorMessage>
+            <ErrorHint>
+              <code>{JSON.stringify(error, null, 2)}</code>
+            </ErrorHint>
           </div>
-        </div>
-      </div>
+        </ErrorBox>
+      </ErrorContainer>
     );
   }
 
   return (
-    <main className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Inventory Dashboard</h1>
+    <PageContainer>
+      <PageTitle>Inventory Dashboard</PageTitle>
       
-      <div className="mb-4">
+      <FilterContainer>
         {/* Filter controls would go here */}
-      </div>
+      </FilterContainer>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <ItemsGrid>
         {items.map((item) => (
-          <Card key={item.id} className="p-4">
-            <h2 className="text-lg font-semibold">{item.name || 'Unnamed Item'}</h2>
-            <p>ID: {item.id}</p>
-            <p>Status: {item.status || 'Unknown'}</p>
-            <p>Price: ${typeof item.price === 'number' ? item.price.toFixed(2) : item.price}</p>
-            {item.inventory !== undefined && <p>Inventory: {item.inventory}</p>}
-            {item.description && <p className="mt-2 text-sm text-gray-600">{item.description}</p>}
+          <Card key={item.id}>
+            <CardTitle>{item.name || 'Unnamed Item'}</CardTitle>
+            <ItemText>ID: {item.id}</ItemText>
+            <ItemText>Status: {item.status || 'Unknown'}</ItemText>
+            <ItemText>Price: ${typeof item.price === 'number' ? item.price.toFixed(2) : item.price}</ItemText>
+            {item.inventory !== undefined && <ItemText>Inventory: {item.inventory}</ItemText>}
+            {item.description && <ItemDescription>{item.description}</ItemDescription>}
           </Card>
         ))}
-      </div>
-    </main>
+      </ItemsGrid>
+    </PageContainer>
   );
 } 

@@ -17,7 +17,7 @@ This exercise is designed as a 1-hour live coding session to evaluate a candidat
 
 - Next.js 13+ with App Router
 - TypeScript setup
-- Basic UI components with Tailwind CSS
+- Basic UI components with styled-components
 - JSON Server with authentication middleware
 - Minimal testing infrastructure with passing but incomplete tests
 
