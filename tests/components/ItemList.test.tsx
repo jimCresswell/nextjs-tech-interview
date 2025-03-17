@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ItemList from '../../src/components/ItemList';
-import type { NormalizedItems, RawItems } from '../../src/lib/types';
+import type { NormalizedItems } from '../../src/lib/types';
 
 describe('ItemList component', () => {
   const goodItems: NormalizedItems = [
